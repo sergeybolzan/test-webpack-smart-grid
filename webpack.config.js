@@ -1,7 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = (env, argv) => {
   const isDevelopment = argv.mode === 'development';
@@ -12,18 +11,9 @@ module.exports = (env, argv) => {
           test: /\.less$/,
           use: [
             isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: isDevelopment
-              }
-            },
-            {
-              loader: 'less-loader',
-              options: {
-                sourceMap: isDevelopment
-              }
-            }
+            { loader: 'css-loader', options: { sourceMap: isDevelopment } },
+            'postcss-loader',
+            { loader: 'less-loader', options: { sourceMap: isDevelopment } }
           ]
         }
       ]
@@ -35,7 +25,6 @@ module.exports = (env, argv) => {
         favicon: './src/favicon.png'
       }),
       new MiniCssExtractPlugin(),
-      new OptimizeCssAssetsPlugin(),
       new CleanWebpackPlugin()
     ]
   };
