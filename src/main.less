@@ -1,0 +1,24 @@
+@import './smart-grid/smart-grid.less';
+@import './test.less';
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  .wrapper();
+}
+
+.items {
+  .row-flex();
+  .md(justify-content, center);
+
+  .item {
+    .col();
+    .size(3);
+    .size-md(4);
+    .size-sm(6);
+    .size-xs(12);
+  }
+}
